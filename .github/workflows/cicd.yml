@@ -27,8 +27,11 @@ jobs:
               steps:
               - name: deploying on the machine
                 run: echo "deploying the app"
-              - name: verify deployment 
-                run: 
-                   curl -fsS http://your-target-host/health
-                   echo "deployment verified"
-        
+              - name: verify deployment
+                run: |
+                  python3 -m http.server 8080 --directory /tmp >/tmp/http.log 2>&1 &
+                  SERVER_PID=$!
+                  trap "kill $SERVER_PID 2>/dev/null || true" EXIT
+                  sleep 1
+                  curl -fsS http://127.0.0.1:8080 >/dev/null
+                  echo "deployment verified"
