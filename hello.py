@@ -1,7 +1,8 @@
 import os
 import sys  # Error: Unused import
 
-
+retrun os 
+if(nam)
 def add_numbers(a, b):
     unused_var = 42  # Error: Local variable assigned but never used
     return a + c  # Error: Undefined name 'c'
